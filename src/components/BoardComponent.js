@@ -7,8 +7,8 @@ class BoardComponent extends Component {
     super(props);
 
     this.state = {
-      squares: Array(props.n * props.n).fill(null),
-      xNext: true,
+      // squares: Array(props.n * props.n).fill(null),
+      // xNext: true,
       status: "Let's Start"
     };
 
@@ -16,12 +16,12 @@ class BoardComponent extends Component {
     this.resetGame = this.resetGame.bind(this);
   }
 
-  resetGame = () => {
-    this.setState({
-      squares: Array(9).fill(null),
-      xNext: true
-    });
-  };
+  // resetGame = () => {
+  //   this.setState({
+  //     squares: Array(9).fill(null),
+  //     xNext: true
+  //   });
+  // };
 
   updateSquare = i => {
     let curSquares = this.state.squares.slice();

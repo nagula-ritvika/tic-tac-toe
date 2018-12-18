@@ -7,17 +7,27 @@ class GameComponent extends Component {
     super(props);
 
     this.state = {
-      n: 3
-      // squares: Array(9).fill(null),
-      // xNext: true
+      n: 3,
+      squares: Array(9).fill(null),
+      xNext: true
     };
   }
+
+  resetGame = () => {
+    this.setState({
+      n: 3,
+      squares: Array(9).fill(null),
+      xNext: true
+    });
+  };
 
   render() {
     return (
       <div className="game">
         <div className="change_game">
-          <button className="new_game">New Game</button>
+          <button className="new_game" onClick={this.resetGame}>
+            New Game
+          </button>
           <input
             type="text"
             value={this.state.n}
