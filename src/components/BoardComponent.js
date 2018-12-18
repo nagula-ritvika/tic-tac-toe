@@ -90,7 +90,7 @@ class BoardComponent extends Component {
           {this.renderSquare(7)}
           {this.renderSquare(8)}
         </div>
-        <div class="change_game">
+        <div className="change_game">
           <NewGameComponent handleNewGame={this.resetGame} />
         </div>
       </div>

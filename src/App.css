@@ -25,20 +25,23 @@ ul {
   font-size: 24px;
   font-weight: bold;
   line-height: 34px;
-  height: 34px;
-  margin-right: -1px;
-  margin-top: -1px;
+  height: 60px;
+  margin-right: 2px;
+  margin-top: 2px;
   padding: 0;
   text-align: center;
-  width: 34px;
+  width: 60px;
 }
 
 .change_game {
   margin-top: 20px;
+  margin-left: 15px;
 }
 
 .new_game {
   text-align: center;
+  font: 16px "Century Gothic", Futura, sans-serif;
+  border-width: 2px;
 }
 
 .square:focus {
