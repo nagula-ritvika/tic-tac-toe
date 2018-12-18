@@ -33,6 +33,14 @@ ul {
   width: 34px;
 }
 
+.change_game {
+  margin-top: 20px;
+}
+
+.new_game {
+  text-align: center;
+}
+
 .square:focus {
   outline: none;
 }
