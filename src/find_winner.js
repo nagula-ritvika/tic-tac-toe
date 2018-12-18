@@ -42,28 +42,31 @@ const checkDiagonal = (topLeft, n, vals) => {
 };
 
 const find_winner = board => {
-  let n = Math.sqrt(board.length);
-  let tempBoard = board.slice();
-  console.log("in find_winner");
-  let vals = [];
-  while (tempBoard.length) {
-    vals.push(tempBoard.splice(0, n));
-  }
+  return new Promise((resolve, reject) => {
+    let n = Math.sqrt(board.length);
+    let tempBoard = board.slice();
+    // console.log("in find_winner");
+    let vals = [];
+    while (tempBoard.length) {
+      vals.push(tempBoard.splice(0, n));
+    }
 
-  let winner = checkLines(true, n, vals);
-  if (winner !== null) {
-    return winner;
-  }
-  winner = checkLines(false, n, vals);
-  if (winner !== null) {
-    return winner;
-  }
-  winner = checkDiagonal(true, n, vals);
-  if (winner !== null) {
-    return winner;
-  }
-  winner = checkDiagonal(false, n, vals);
-  return winner;
+    let winner = checkLines(true, n, vals);
+    if (winner !== null) {
+      resolve(winner);
+    }
+    winner = checkLines(false, n, vals);
+    if (winner !== null) {
+      resolve(winner);
+    }
+    winner = checkDiagonal(true, n, vals);
+    if (winner !== null) {
+      resolve(winner);
+    }
+    winner = checkDiagonal(false, n, vals);
+
+    resolve(winner);
+  });
 };
 
 export default find_winner;

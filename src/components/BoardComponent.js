@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import SquareComponent from "./SquareComponent";
-import NewGameComponent from "./NewGameComponent";
-// import find_winner from "../find_winner";
+import find_winner from "../find_winner";
 
 class BoardComponent extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      squares: Array(9).fill(null),
-      xNext: true
+      squares: Array(props.n * props.n).fill(null),
+      xNext: true,
+      status: "Let's Start"
     };
 
     this.updateSquare = this.updateSquare.bind(this);
@@ -26,10 +26,20 @@ class BoardComponent extends Component {
   updateSquare = i => {
     let curSquares = this.state.squares.slice();
     curSquares[i] = this.state.xNext ? "X" : "O";
-
-    this.setState({
-      squares: curSquares,
-      xNext: !this.state.xNext
+    find_winner(curSquares).then(winner => {
+      this.setState(
+        {
+          squares: curSquares,
+          xNext: !this.state.xNext
+        },
+        () => {
+          this.setState({
+            status: winner
+              ? "Winner is " + winner
+              : "Next player: " + (this.state.xNext ? "X" : "O")
+          });
+        }
+      );
     });
   };
 
@@ -67,14 +77,13 @@ class BoardComponent extends Component {
   };
 
   render() {
-    const winner = this.checkWinner(this.state.squares);
-    const status = winner
-      ? "Winner is " + winner
-      : "Next player: " + (this.state.xNext ? "X" : "O");
+    // const winner = this.checkWinner(this.state.squares);
 
     return (
       <div>
-        <div className="status">{status}</div>
+        {this.state.status !== "" && (
+          <div className="status">{this.state.status}</div>
+        )}
         <div className="board-row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
@@ -89,9 +98,6 @@ class BoardComponent extends Component {
           {this.renderSquare(6)}
           {this.renderSquare(7)}
           {this.renderSquare(8)}
-        </div>
-        <div className="change_game">
-          <NewGameComponent handleNewGame={this.resetGame} />
         </div>
       </div>
     );
